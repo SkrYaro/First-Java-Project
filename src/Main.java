@@ -1,5 +1,11 @@
+import java.util.Arrays;
+
 class Main{
     public static void main(String[] args){
-        System.out.print("initial code");
+        GameState game = new GameState();
+
+
+        System.out.println(GameState.getBoard());
+
     }
 }
