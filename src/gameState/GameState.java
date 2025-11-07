@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package gameState;
+
 import java.util.Arrays;
 
 public class GameState {

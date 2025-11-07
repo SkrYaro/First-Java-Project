@@ -1,6 +1,6 @@
-import java.util.Arrays;
+import gameState.GameState;
 
-class Main{
+class Main {
     public static void main(String[] args){
         GameState game = new GameState();
 
