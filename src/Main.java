@@ -11,7 +11,7 @@ class Main {
                 System.out.println(GameState.getBoard());
 
                 System.out.println((Pawn.changePos(new int[] {6 , 1} )));
-                System.out.println((Pawn.changePos(new int[] {6 , 2} )));
+                System.out.println((Pawn.changePos(new int[] {6 , 3} )));
 
 
                 System.out.printf("white move " + whiteMove);
