@@ -1,11 +1,10 @@
 import gameState.GameState;
 import gameState.gameObject.Pawn;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         GameState game = new GameState();
         boolean whiteMove = true;
         boolean run = true;
@@ -27,11 +26,10 @@ class Main {
 
                     System.out.printf("white move on" + poss);
                     whiteMove = !whiteMove;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Error uncorrect write, try again");
                 }
-            }
-            else {
+            } else {
                 try {
                     System.out.println(GameState.getHorizontLine());
                     System.out.println(GameState.getBoard());
@@ -43,7 +41,7 @@ class Main {
 
                     System.out.printf("white move on" + poss);
                     whiteMove = !whiteMove;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Error uncorrect write, try again");
                 }
             }

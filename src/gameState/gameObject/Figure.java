@@ -1,7 +1,5 @@
 package gameState.gameObject;
 
-import gameState.GameState;
-
 public abstract class Figure {
 
 //    public abstract String figureCost();
