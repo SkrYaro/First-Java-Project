@@ -26,17 +26,17 @@ public class Pawn extends Figure {
             if (board[posY - 1][posX] == null) {
                 possibleMoves.add(new Coordinates(posX, posY - 1));
             }
-            if (posY >= 2) {
+            if (posY > 2) {
                 if (firstMove && board[posY - 2][posX] == null && board[posY - 1][posX] == null) {
                     possibleMoves.add(new Coordinates(posX, posY - 2));
                 }
             }
-            if (posX <= 7) {
+            if (posX < 7) {
                 if (board[posY - 1][posX + 1] != null && board[posY - 1][posX + 1].white) {
                     possibleMoves.add(new Coordinates(posX + 1, posY - 1));
                 }
             }
-            if (posX >= 1) {
+            if (posX > 1) {
                 if (board[posY - 1][posX - 1] != null && board[posY - 1][posX - 1].white) {
                     possibleMoves.add(new Coordinates(posX - 1, posY - 1));
                 }
@@ -45,17 +45,17 @@ public class Pawn extends Figure {
             if (board[posY + 1][posX] == null) {
                 possibleMoves.add(new Coordinates(posX, posY + 1));
             }
-            if (posY <= 5) {
+            if (posY < 5) {
                 if (firstMove && board[posY + 2][posX] == null) {
                     possibleMoves.add(new Coordinates(posX, posY + 2));
                 }
             }
-            if (posX <= 7) {
+            if (posX < 7) {
                 if (board[posY + 1][posX + 1] != null && board[posY - 1][posX + 1].white) {
                     possibleMoves.add(new Coordinates(posX + 1, posY - 1));
                 }
             }
-            if (posX >= 1) {
+            if (posX > 1) {
                 if (board[posY + 1][posX - 1] != null && board[posY - 1][posX - 1].white) {
                     possibleMoves.add(new Coordinates(posX - 1, posY - 1));
                 }

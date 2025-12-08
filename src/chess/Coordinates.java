@@ -2,6 +2,7 @@ package chess;
 
 public class Coordinates {
 
+    public boolean sucses;
     public int x;
     public int y;
 
@@ -15,7 +16,31 @@ public class Coordinates {
         this.y = y;
     }
 
-    public static int getCharX(char x) {
+    public Coordinates(String figureCoordStr) {
+
+
+        if (figureCoordStr.length() >= 3) {
+            this.sucses = false;
+            System.out.println("You make an mistake");
+        } else {
+            x = figureCoordStr.charAt(0);
+            y = figureCoordStr.charAt(1)- 49;
+            if ((x >= 'a' && x <= ('a' + 7)) && (y <= 8)) {
+                this.sucses = true;
+                this.x = x - 'a';
+                this.y = y  ;
+                System.out.println(this.x + "   " +this.y);
+            }
+            else{
+                System.out.println(x +"   " + y );
+                System.out.println("You missed in square");
+                this.sucses = false;
+            }
+        }
+
+    }
+
+    public int getCharX() {
         int num = x - ('a' - 1);
         System.out.println(num);
         return num;
@@ -24,6 +49,4 @@ public class Coordinates {
     public int getX() {
         return x;
     }
-
-
 }
