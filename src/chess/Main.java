@@ -34,15 +34,23 @@ class Main {
             // choose figure
             while (playerChoosingPos) {
                 playerChoseMove = true;
-                System.out.println("Please write a-h , 1-8 for choosing poss and movement");
+                System.out.println("Please write first: a-h , second: 1-8 for choosing poss and movement");
                 String figureCoordStr = scanner.next(); // b7
                 System.out.println(figureCoordStr);
                 Coordinates figureCoord = new Coordinates(figureCoordStr);
                 if (figureCoord.sucses) {
                     if (gameState.getPossibleMoves(figureCoord) != null) {
+                        System.out.println(whiteMove + " " + gameState.board[figureCoord.x][figureCoord.y].white);
+                        if ( gameState.board[figureCoord.x][figureCoord.y].white == whiteMove ) {
+                            playerPosChoosed = true;
+                        }else if (!whiteMove){
+                            System.out.println("This isn't your color , you're white");
+                        }else{
+                            System.out.println("This isn't your color , you're black");
+                        }
 
-                        playerPosChoosed = true;
-
+                    }else {
+                        System.out.println("It is empty square");
                     }
                 }
 
