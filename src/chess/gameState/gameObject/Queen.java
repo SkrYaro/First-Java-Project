@@ -10,7 +10,7 @@ public class Queen extends Figure {
 
 
     public Queen(boolean white, char type) {
-        super(white, type);
+        super(white, 'Q');
     }
 
     @Override

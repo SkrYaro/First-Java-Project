@@ -10,7 +10,7 @@ public class Bishop extends Figure {
 
 
     public Bishop(boolean white, char type) {
-        super(white, type);
+        super(white, 'B');
     }
 
     @Override

@@ -28,15 +28,10 @@ public class GameState {
             {"wR", "wB", "wH", "wQ", "wK", "wH", "wB", "wR"},
     };*/
 
+
     public Figure[][] board = {
-            {new Rook(true, 'R'), new Horse(true, 'H'),
-                    new Bishop(true, 'B'), new Queen(true, 'Q'),
-                    new King(true, 'K'), new Bishop(true, 'B'),
-                    new Horse(true, 'H'), new Rook(true, 'R')},
-            {new Pawn(true), new Pawn(true),
-                    new Pawn(true), new Pawn(true),
-                    new Pawn(true), new Pawn(true),
-                    new Pawn(true), new Pawn(true)},
+            {new Rook(true, 'R'), new Horse(true, 'H'), new Bishop(true, 'B'), new Queen(true, 'Q'), new King(true, 'K'), new Bishop(true, 'B'), new Horse(true, 'H'), new Rook(true, 'R')},
+            {new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true)},
             {new Pawn(false), null, null, null, null, null, null, null},
             {null, null, null, null, null, null, null, null},
             {new Pawn(true), null, null, null, null, null, null, null},

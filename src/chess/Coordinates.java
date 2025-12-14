@@ -24,11 +24,11 @@ public class Coordinates {
             System.out.println("You make an mistake");
         } else {
             x = figureCoordStr.charAt(0);
-            y = figureCoordStr.charAt(1)- 49;
-            if ((x >= 'a' && x <= ('a' + 7)) && (y <= 8)) {
+            y = figureCoordStr.charAt(1);
+            if ((x >= 'a' && x <= ('a' + 7)) && (y - 49 <= 8)) {
                 this.sucses = true;
-                this.x = x - 'a';
-                this.y = y  ;
+                x = x - 'a';
+                y = y - 49  ;
                 System.out.println(this.x + "   " +this.y);
             }
             else{
