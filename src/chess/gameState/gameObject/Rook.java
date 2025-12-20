@@ -9,7 +9,7 @@ import java.util.SequencedCollection;
 public class Rook extends Figure {
 
     public Rook(boolean white, char type) {
-        super(white, type);
+        super(white, 'R');
     }
 
     @Override

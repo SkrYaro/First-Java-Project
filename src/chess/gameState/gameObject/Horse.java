@@ -10,7 +10,7 @@ public class Horse extends Figure {
 
 
     public Horse(boolean white, char type) {
-        super(white, type);
+        super(white, 'H');
     }
 
     @Override

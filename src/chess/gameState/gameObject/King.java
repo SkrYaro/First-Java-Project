@@ -10,7 +10,7 @@ public class King extends Figure {
 
 
     public King(boolean white, char type) {
-        super(white, type);
+        super(white, 'K');
     }
 
     @Override
