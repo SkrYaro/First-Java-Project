@@ -11,11 +11,8 @@ import chess.gameState.gameObject.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GameState {
-
-    Scanner chooseMove = new Scanner(System.in);
 
     /*public String[][] gameBoard = {
             {"bR", "bB", "bH", "bQ", "bK", "bH", "bB", "bR"},
@@ -48,7 +45,7 @@ public class GameState {
     };
 
     public String getHorizonLine() {
-        StringBuilder horizonLine = new StringBuilder("");
+        StringBuilder horizonLine = new StringBuilder();
         for (int i = 0; i < 8; i++) {
             char letter = (char) ('a' + i);
             horizonLine.append("  | ").append(letter);
@@ -90,8 +87,8 @@ public class GameState {
             consoleBoard.append(i + 1).append(sideLine);
             for (int j = 0; j < board[i].length; j++) {
                 Figure figure = board[i][j];
-                for (int k = 0; k < possibleMoves.size(); k++) {
-                    if (possibleMoves.get(k).x == j && possibleMoves.get(k).y == i) {
+                for (Coordinates possibleMove : possibleMoves) {
+                    if (possibleMove.x == j && possibleMove.y == i) {
                         consoleBoard.append("⬜");
                     }
                 }
@@ -137,10 +134,10 @@ public class GameState {
 
 
         Coordinates possibleMove = null;
-        for (int i = 0; i < possibleMoves.size(); i++) {
-            System.out.println(possibleMoves.get(i).x + possibleMoves.get(i).y);
-            if (possibleMoves.get(i).x == cord.x && possibleMoves.get(i).y == cord.y) {
-                possibleMove = new Coordinates(possibleMoves.get(i).x, possibleMoves.get(i).y);
+        for (Coordinates move : possibleMoves) {
+            System.out.println(move.x + move.y);
+            if (move.x == cord.x && move.y == cord.y) {
+                possibleMove = new Coordinates(move.x, move.y);
                 return possibleMove;
             }
             System.out.println("don't have possible move try again");
