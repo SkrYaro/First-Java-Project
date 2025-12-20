@@ -73,6 +73,7 @@ public class Pawn extends Figure {
         int moveX = move.x;
         int moveY = move.y;
 
+        firstMove = false;
 //            moving your figure
 
 

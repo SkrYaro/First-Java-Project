@@ -90,8 +90,8 @@ public class GameState {
             consoleBoard.append(i + 1).append(sideLine);
             for (int j = 0; j < board[i].length; j++) {
                 Figure figure = board[i][j];
-                for (int k = 0 ; k < possibleMoves.size();k++){
-                    if (possibleMoves.get(k).x == j && possibleMoves.get(k).y == i){
+                for (int k = 0; k < possibleMoves.size(); k++) {
+                    if (possibleMoves.get(k).x == j && possibleMoves.get(k).y == i) {
                         consoleBoard.append("⬜");
                     }
                 }
@@ -138,7 +138,7 @@ public class GameState {
 
         Coordinates possibleMove = null;
         for (int i = 0; i < possibleMoves.size(); i++) {
-            System.out.println(possibleMoves.get(i).x  + possibleMoves.get(i).y);
+            System.out.println(possibleMoves.get(i).x + possibleMoves.get(i).y);
             if (possibleMoves.get(i).x == cord.x && possibleMoves.get(i).y == cord.y) {
                 possibleMove = new Coordinates(possibleMoves.get(i).x, possibleMoves.get(i).y);
                 return possibleMove;

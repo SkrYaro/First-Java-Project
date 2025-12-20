@@ -30,7 +30,6 @@ class Main {
 
         // show board
         System.out.println(gameState.getBoard());
-        playerChoosingPos = true;
 
         // choose figure
         while (playerChoosingPos) {
@@ -40,12 +39,12 @@ class Main {
             String figureCoordStr = scanner.next(); // b7
             System.out.println(figureCoordStr);
             Coordinates figureCoord = new Coordinates(figureCoordStr);
-            if (figureCoord.sucses) {
+            if (figureCoord.success) {
                 if (gameState.getPossibleMoves(figureCoord) != null) {
                     Figure figure = gameState.board[figureCoord.y][figureCoord.x];
 //                        System.out.println(figureCoord.x + " " + figureCoord.y);
 //                        System.out.println(whiteMove + " " + figure.white);
-                    if (figure != null){
+                    if (figure != null) {
                         if (figure.white == whiteMove) {
                             playerPosChoosed = true;
                         } else if (!whiteMove) {
@@ -53,13 +52,13 @@ class Main {
                         } else {
                             System.out.println("This isn't your color , you're black");
                         }
-                    }else{
+                    } else {
                         System.out.println("Error , this is empty square");
                     }
                 } else {
                     System.out.println("It is empty square");
                 }
-                figureCoord.sucses = false;
+                figureCoord.success = false;
             }
 
 
@@ -82,10 +81,10 @@ class Main {
 
                         Coordinates movement = gameState.getPossibleMove(figurePossibleMoves, moveFigureCord);
 
-                        Figure figure = gameState.board[figureCoord.x][figureCoord.y];
+                        Figure figure = gameState.board[figureCoord.y][figureCoord.x];
 
                         figure.makeMove(figureCoord, movement, gameState.board);
-                        System.out.println("Move has made");
+                        System.out.println("Move has been made");
                         playerChoseMove = false;
                         playerPosChoosed = false;
                         playerChoosingPos = false;
