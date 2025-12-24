@@ -4,12 +4,11 @@ import chess.Coordinates;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SequencedCollection;
 
 public class Queen extends Figure {
 
 
-    public Queen(boolean white, char type) {
+    public Queen(boolean white) {
         super(white, 'Q');
     }
 

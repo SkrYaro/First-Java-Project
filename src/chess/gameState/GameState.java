@@ -14,6 +14,21 @@ import java.util.List;
 
 public class GameState {
 
+/*
+*
+* | a  | b  | c  | d  | e  | f  | g  | h
+―――――――――――――――――――――――――
+1| wR , wH , wB , wQ , wK , wB , wH , wR ,|
+2| wP , wP , wP , wP , wP , wP , wP , wP ,|
+3|    ,    ,    ,    ,    ,    ,    ,    ,|
+4|    ,    ,    ,    ,    ,    ,    ,    ,|
+5|    ,    ,    ,    ,    ,    ,    ,    ,|
+6|    ,    ,    ,    ,    ,    ,    ,    ,|
+7| bP , bP , bP , bP , bP , bP , bP , bP ,|
+8| bR , bH , bB , bQ , bK , bB , bH , bR ,|
+*
+* */
+
     /*public String[][] gameBoard = {
             {"bR", "bB", "bH", "bQ", "bK", "bH", "bB", "bR"},
             {"bP", "bP", "bP", "bP", "bP", "bP", "bP", "bP"},
@@ -27,20 +42,14 @@ public class GameState {
 
 
     public Figure[][] board = {
-            {new Rook(true, 'R'), new Horse(true, 'H'), new Bishop(true, 'B'), new Queen(true, 'Q'), new King(true, 'K'), new Bishop(true, 'B'), new Horse(true, 'H'), new Rook(true, 'R')},
+            {new Rook(true), new Horse(true), new Bishop(true), new Queen(true), new King(true), new Bishop(true), new Horse(true), new Rook(true)},
             {new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true)},
-            {new Pawn(false), null, null, null, null, null, null, null},
             {null, null, null, null, null, null, null, null},
-            {new Pawn(true), null, null, null, null, null, null, null},
-            {new Pawn(false), null, null, null, null, null, null, null},
-            {new Pawn(false), new Pawn(false),
-                    new Pawn(false), new Pawn(false),
-                    new Pawn(false), new Pawn(false),
-                    new Pawn(false), new Pawn(false)},
-            {new Rook(false, 'R'), new Horse(false, 'H'),
-                    new Bishop(false, 'B'), new Queen(false, 'Q'),
-                    new King(false, 'K'), new Bishop(false, 'B'),
-                    new Horse(false, 'H'), new Rook(false, 'R')},
+            {null, null, null, null, null, null, null, null},
+            {null, null, null, null, null, null, null, null},
+            {null, null, null, null, null, null, null, null},
+            {new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false)},
+            {new Rook(false), new Horse(false), new Bishop(false), new Queen(false), new King(false), new Bishop(false), new Horse(false), new Rook(false)},
 
     };
 

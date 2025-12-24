@@ -9,7 +9,7 @@ import java.util.SequencedCollection;
 public class Bishop extends Figure {
 
 
-    public Bishop(boolean white, char type) {
+    public Bishop(boolean white) {
         super(white, 'B');
     }
 

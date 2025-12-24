@@ -9,12 +9,19 @@ import java.util.SequencedCollection;
 public class Horse extends Figure {
 
 
-    public Horse(boolean white, char type) {
+    public Horse(boolean white) {
         super(white, 'H');
     }
 
     @Override
     public List<Coordinates> getPossibleMoves(Coordinates pos, Figure[][] board) {
+        /*
+        1
+        2
+        3
+        */
+
+
         List<Coordinates> possibleMoves = new ArrayList<>();
         return possibleMoves;
     }

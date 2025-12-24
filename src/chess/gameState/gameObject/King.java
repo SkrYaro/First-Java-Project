@@ -9,7 +9,7 @@ import java.util.SequencedCollection;
 public class King extends Figure {
 
 
-    public King(boolean white, char type) {
+    public King(boolean white) {
         super(white, 'K');
     }
 

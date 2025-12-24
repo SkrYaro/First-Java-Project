@@ -8,7 +8,7 @@ import java.util.SequencedCollection;
 
 public class Rook extends Figure {
 
-    public Rook(boolean white, char type) {
+    public Rook(boolean white) {
         super(white, 'R');
     }
 
