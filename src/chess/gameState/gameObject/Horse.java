@@ -15,14 +15,38 @@ public class Horse extends Figure {
 
     @Override
     public List<Coordinates> getPossibleMoves(Coordinates pos, Figure[][] board) {
-        /*
-        1
-        2
-        3
-        */
-
-
+                /*
+                *
+                *        | a  | b  | c  | d  | e  | f  | g  | h
+                ―       ――――――――――――――――――――――――
+                1       | wR , wH , wB , wQ , wK , wB , wH , wR ,|
+                2       |    ,    , XX ,    , XX ,    ,    ,    ,|
+                3       |    , XX ,    ,    ,    , XX ,    ,    ,|
+                4       |    ,    ,    , bH ,    ,    ,    ,    ,|
+                5       |    , XX ,    ,    ,    , XX ,    ,    ,|
+                6       |    ,    , XX ,    , XX ,    ,    ,    ,|
+                7       | bP , bP , bP , bP , bP , bP , bP , bP ,|
+                8       | bR ,  , bB , bQ , bK , bB , bH , bR ,|
+                *
+                * */
         List<Coordinates> possibleMoves = new ArrayList<>();
+
+        possibleMoves.add(new Coordinates(pos.x + 1, pos.y - 2));
+
+        possibleMoves.add(new Coordinates(pos.x - 1, pos.y - 2));
+
+        possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 2));
+
+        possibleMoves.add(new Coordinates(pos.x - 1, pos.y + 2));
+
+        possibleMoves.add(new Coordinates(pos.x - 2, pos.y + 1));
+
+        possibleMoves.add(new Coordinates(pos.x - 2, pos.y - 1));
+
+        possibleMoves.add(new Coordinates(pos.x + 2, pos.y + 1));
+
+        possibleMoves.add(new Coordinates(pos.x + 2, pos.y - 1));
+
         return possibleMoves;
     }
 
