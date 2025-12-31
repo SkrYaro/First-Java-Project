@@ -14,6 +14,11 @@ import java.util.List;
 
 public class GameState {
 
+    public static final int BOARD_MIN_ROWS = 0;
+    public static final int BOARD_MIN_COLS = 0;
+    public static final int BOARD_MAX_ROWS = 8;
+    public static final int BOARD_MAX_COLS = 8;
+
 /*
 *
 * | a  | b  | c  | d  | e  | f  | g  | h
@@ -41,17 +46,35 @@ public class GameState {
     };*/
 
 
-    public Figure[][] board = {
+    /*public Figure[][] board = {
             {new Rook(true), new Horse(true), new Bishop(true), new Queen(true),new King(true) , new Bishop(true), new Horse(true), new Rook(true)},
             {new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true)},
             {null, null, null, null, null, null, null, null},
-            {null, null, null, null , null, null, null, null},
+            {null, null, null, null , null, null,null, null},
             {null, null, null, null, null, null, null, null},
             {null, null, null, null, null, null, null, null},
             {new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false)},
             {new Rook(false), new Horse(false), new Bishop(false), new Queen(false), new King(false), new Bishop(false), new Horse(false), new Rook(false)},
 
-    };
+    };*/
+
+    /*public Figure[][] board = {
+            {new Horse(false), null, null, null, null, null, null, new Horse(true)},
+            {null, null, new Pawn(true), null, new Pawn(false), null, null, null},
+            {null, new Horse(true), null, null, null, new Pawn(false), null, null},
+            {null, null, null, new Horse(false), null, null, null, null},
+            {null, null, new Pawn(false), null, null, null, null, null},
+            {null, new Pawn(false), new Pawn(false), null, null, null, null, null},
+            {null, null, new Pawn(true), null, null, null, null, null},
+            {new Horse(true), null, null, null, null, null, null, new Horse(true)},
+    };*/
+
+    public Figure[][] board = new Figure[BOARD_MAX_ROWS][BOARD_MAX_COLS];
+
+    public GameState() {
+        board[5][5] = new Horse(true);
+        board[7][7] = new Horse(false);
+    }
 
     public String getHorizonLine() {
         StringBuilder horizonLine = new StringBuilder();

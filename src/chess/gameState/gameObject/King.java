@@ -16,7 +16,7 @@ public class King extends Figure {
     public List<Coordinates> getPossibleMoves(Coordinates pos, Figure[][] board) {
         List<Coordinates> possibleMoves = new ArrayList<>();
         Figure figure = board[pos.y][pos.x];
-        if (pos.y == 1) {
+        if (pos.y >= 1) {
 
             if (board[pos.y - 1][pos.x] == null) {
                 possibleMoves.add(new Coordinates(pos.x, pos.y - 1));
@@ -26,7 +26,7 @@ public class King extends Figure {
                 }
             }
 
-            if (pos.x == 8) {
+            if (pos.x <= 7) {
                 if (board[pos.y - 1][pos.x + 1] == null) {
                     possibleMoves.add(new Coordinates(pos.x + 1, pos.y - 1));
                 } else {
@@ -35,7 +35,7 @@ public class King extends Figure {
                     }
                 }
             }
-            if (pos.x == 1) {
+            if (pos.x >= 1) {
                 if (board[pos.y - 1][pos.x - 1] == null) {
                     possibleMoves.add(new Coordinates(pos.x - 1, pos.y - 1));
                 } else {
@@ -45,33 +45,33 @@ public class King extends Figure {
                 }
             }
         }
-        if (pos.x == 8) {
+        if (pos.x <= 7 ) {
             if (board[pos.y][pos.x + 1] == null) {
                 possibleMoves.add(new Coordinates(pos.x + 1, pos.y));
             } else {
-                if (figure.white != board[pos.y][pos.x].white) {
+                if (figure.white != board[pos.y][pos.x + 1].white) {
                     possibleMoves.add(new Coordinates(pos.x + 1, pos.y));
                 }
             }
         }
-        if (pos.x == 1) {
+        if (pos.x >= 1) {
             if (board[pos.y][pos.x - 1] == null) {
                 possibleMoves.add(new Coordinates(pos.x - 1, pos.y));
             } else {
-                if (figure.white != board[pos.y][pos.x].white) {
+                if (figure.white != board[pos.y][pos.x -1].white) {
                     possibleMoves.add(new Coordinates(pos.x - 1, pos.y));
                 }
             }
         }
-        if (pos.y == 8) {
-            if (board[pos.y][pos.x] == null) {
+        if (pos.y <= 7) {
+            if (board[pos.y + 1][pos.x] == null) {
                 possibleMoves.add(new Coordinates(pos.x, pos.y + 1));
             } else {
-                if (figure.white != board[pos.y][pos.x].white) {
+                if (figure.white != board[pos.y + 1][pos.x].white) {
                     possibleMoves.add(new Coordinates(pos.x, pos.y + 1));
                 }
             }
-            if (pos.x == 1) {
+            if (pos.x >= 1) {
                 if (board[pos.y + 1][pos.x - 1] == null) {
                     possibleMoves.add(new Coordinates(pos.x - 1, pos.y + 1));
                 } else {
@@ -80,13 +80,11 @@ public class King extends Figure {
                     }
                 }
             }
-            if (pos.x == 8) {
-                if (board[pos.y + 1][pos.x] == null) {
-                    System.out.println("йй");
+            if (pos.x <= 7) {
+                if (board[pos.y + 1][pos.x + 1] == null) {
                     possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 1));
                 } else {
-                    System.out.println("ууии");
-                    if (figure.white != board[pos.x + 1][pos.y + 1].white) {
+                    if (figure.white != board[pos.y + 1][pos.x + 1].white) {
                         possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 1));
                     }
                 }

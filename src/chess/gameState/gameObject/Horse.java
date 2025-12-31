@@ -1,10 +1,10 @@
 package chess.gameState.gameObject;
 
 import chess.Coordinates;
+import chess.gameState.GameState;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SequencedCollection;
 
 public class Horse extends Figure {
 
@@ -31,21 +31,120 @@ public class Horse extends Figure {
                 * */
         List<Coordinates> possibleMoves = new ArrayList<>();
 
-        possibleMoves.add(new Coordinates(pos.x + 1, pos.y - 2));
+        Figure figure = board[pos.y][pos.x];
 
-        possibleMoves.add(new Coordinates(pos.x - 1, pos.y - 2));
+        List<Coordinates> vectors = List.of(
+                new Coordinates(2, 1),
+                new Coordinates(1, 2),
+                new Coordinates(-2, -1),
+                new Coordinates(-1, -2),
+                new Coordinates(2, -1),
+                new Coordinates(-1, 2),
+                new Coordinates(-2, 1),
+                new Coordinates(1, -2)
+        );
 
-        possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 2));
+        for (Coordinates vector: vectors) {
+            int moveX = pos.x + vector.x; // x = [0; 7]
+            int moveY = pos.y + vector.y; // y = [0; 7]
+            if (moveX < GameState.BOARD_MIN_COLS - 1 || moveX > GameState.BOARD_MAX_COLS - 1) { // && = AND, || = OR
+                continue;
+            }
+            // if on board
+            // if figure && figure.white != white
+            possibleMoves.add(new Coordinates(moveX, moveY));
+        }
 
-        possibleMoves.add(new Coordinates(pos.x - 1, pos.y + 2));
+        if (pos.y >= 3) {
 
-        possibleMoves.add(new Coordinates(pos.x - 2, pos.y + 1));
+            if (pos.x <= 6) {
 
-        possibleMoves.add(new Coordinates(pos.x - 2, pos.y - 1));
+                if (board[pos.y - 2][pos.x + 1] == null) {
+                    possibleMoves.add(new Coordinates(pos.x + 1, pos.y - 2));
+                } else {
+                    if (figure.white != board[pos.y - 2][pos.x + 1].white) {
+                        possibleMoves.add(new Coordinates(pos.x + 1, pos.y - 2));
+                    }
+                }
+            }
+            if (pos.x >= 1) {
+                if (board[pos.y - 2][pos.x - 1] == null) {
+                    possibleMoves.add(new Coordinates(pos.x - 1, pos.y - 2));
+                } else {
+                    if (figure.white != board[pos.y - 2][pos.x - 1].white) {
+                        possibleMoves.add(new Coordinates(pos.x - 1, pos.y - 2));
+                    }
+                }
+            }
+        }
+        if (pos.y <= 6) {
 
-        possibleMoves.add(new Coordinates(pos.x + 2, pos.y + 1));
+            if (pos.x <= 6) {
+                if (board[pos.y + 2][pos.x + 1] == null) {
+                    possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 2));
+                } else {
+                    if (figure.white != board[pos.y + 2][pos.x + 1].white) {
+                        possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 2));
+                    }
+                }
+            }
 
-        possibleMoves.add(new Coordinates(pos.x + 2, pos.y - 1));
+            if (pos.x >= 1) {
+                if (board[pos.y + 2][pos.x - 1] == null) {
+                    possibleMoves.add(new Coordinates(pos.x - 1, pos.y + 2));
+                } else {
+                    if (figure.white != board[pos.y + 2][pos.x - 1].white) {
+                        possibleMoves.add(new Coordinates(pos.x - 1, pos.y + 2));
+                    }
+                }
+            }
+        }
+
+        if (pos.x >= 2) {
+
+            if (pos.y <= 6) {
+                if (board[pos.y + 1][pos.x - 2] == null) {
+                    possibleMoves.add(new Coordinates(pos.x - 2, pos.y + 1));
+                } else {
+                    if (figure.white != board[pos.y + 1][pos.x - 2].white) {
+                        possibleMoves.add(new Coordinates(pos.x - 2, pos.y + 1));
+                    }
+                }
+            }
+
+            if (pos.y >= 3) {
+
+
+                if (board[pos.y - 1][pos.x - 2] == null) {
+                    possibleMoves.add(new Coordinates(pos.x - 2, pos.y - 1));
+                } else {
+                    if (figure.white != board[pos.y - 1][pos.x - 2].white) {
+                        possibleMoves.add(new Coordinates(pos.x - 2, pos.y - 1));
+                    }
+                }
+
+            }
+        }
+        if (pos.x <= 6) {
+            if (pos.y <= 6) {
+                if (board[pos.y + 1][pos.x + 2] == null) {
+                    possibleMoves.add(new Coordinates(pos.x + 2, pos.y + 1));
+                } else {
+                    if (figure.white != board[pos.y + 1][pos.x + 2].white) {
+                        possibleMoves.add(new Coordinates(pos.x + 2, pos.y + 1));
+                    }
+                }
+            }
+            if (pos.y >= 3) {
+                if (board[pos.y - 1][pos.x + 2] == null) {
+                    possibleMoves.add(new Coordinates(pos.x + 2, pos.y - 1));
+                } else {
+                    if (figure.white != board[pos.y - 1][pos.x + 2].white) {
+                        possibleMoves.add(new Coordinates(pos.x + 2, pos.y - 1));
+                    }
+                }
+            }
+        }
 
         return possibleMoves;
     }
