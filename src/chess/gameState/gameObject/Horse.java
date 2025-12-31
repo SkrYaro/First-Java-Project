@@ -44,107 +44,23 @@ public class Horse extends Figure {
                 new Coordinates(1, -2)
         );
 
-        for (Coordinates vector: vectors) {
+        for (Coordinates vector : vectors) {
             int moveX = pos.x + vector.x; // x = [0; 7]
             int moveY = pos.y + vector.y; // y = [0; 7]
-            if (moveX < GameState.BOARD_MIN_COLS - 1 || moveX > GameState.BOARD_MAX_COLS - 1) { // && = AND, || = OR
-                continue;
-            }
-            // if on board
-            // if figure && figure.white != white
-            possibleMoves.add(new Coordinates(moveX, moveY));
-        }
-
-        if (pos.y >= 3) {
-
-            if (pos.x <= 6) {
-
-                if (board[pos.y - 2][pos.x + 1] == null) {
-                    possibleMoves.add(new Coordinates(pos.x + 1, pos.y - 2));
+            if ((GameState.BOARD_MIN_COLS <= moveY && moveY <= GameState.BOARD_MAX_COLS - 1) && (GameState.BOARD_MIN_ROWS <= moveX && moveX <= GameState.BOARD_MAX_ROWS - 1)) {
+                if (board[moveY][moveX] == null) {
+                    possibleMoves.add(new Coordinates(moveX, moveY));
                 } else {
-                    if (figure.white != board[pos.y - 2][pos.x + 1].white) {
-                        possibleMoves.add(new Coordinates(pos.x + 1, pos.y - 2));
+                    if (figure.white != board[moveY][moveX].white) {
+                        possibleMoves.add(new Coordinates(moveX, moveY));
                     }
                 }
-            }
-            if (pos.x >= 1) {
-                if (board[pos.y - 2][pos.x - 1] == null) {
-                    possibleMoves.add(new Coordinates(pos.x - 1, pos.y - 2));
-                } else {
-                    if (figure.white != board[pos.y - 2][pos.x - 1].white) {
-                        possibleMoves.add(new Coordinates(pos.x - 1, pos.y - 2));
-                    }
-                }
-            }
-        }
-        if (pos.y <= 6) {
-
-            if (pos.x <= 6) {
-                if (board[pos.y + 2][pos.x + 1] == null) {
-                    possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 2));
-                } else {
-                    if (figure.white != board[pos.y + 2][pos.x + 1].white) {
-                        possibleMoves.add(new Coordinates(pos.x + 1, pos.y + 2));
-                    }
-                }
-            }
-
-            if (pos.x >= 1) {
-                if (board[pos.y + 2][pos.x - 1] == null) {
-                    possibleMoves.add(new Coordinates(pos.x - 1, pos.y + 2));
-                } else {
-                    if (figure.white != board[pos.y + 2][pos.x - 1].white) {
-                        possibleMoves.add(new Coordinates(pos.x - 1, pos.y + 2));
-                    }
-                }
+                // if on board
+                // if figure && figure.white != white
+                possibleMoves.add(new Coordinates(moveX, moveY));
             }
         }
 
-        if (pos.x >= 2) {
-
-            if (pos.y <= 6) {
-                if (board[pos.y + 1][pos.x - 2] == null) {
-                    possibleMoves.add(new Coordinates(pos.x - 2, pos.y + 1));
-                } else {
-                    if (figure.white != board[pos.y + 1][pos.x - 2].white) {
-                        possibleMoves.add(new Coordinates(pos.x - 2, pos.y + 1));
-                    }
-                }
-            }
-
-            if (pos.y >= 3) {
-
-
-                if (board[pos.y - 1][pos.x - 2] == null) {
-                    possibleMoves.add(new Coordinates(pos.x - 2, pos.y - 1));
-                } else {
-                    if (figure.white != board[pos.y - 1][pos.x - 2].white) {
-                        possibleMoves.add(new Coordinates(pos.x - 2, pos.y - 1));
-                    }
-                }
-
-            }
-        }
-        if (pos.x <= 6) {
-            if (pos.y <= 6) {
-                if (board[pos.y + 1][pos.x + 2] == null) {
-                    possibleMoves.add(new Coordinates(pos.x + 2, pos.y + 1));
-                } else {
-                    if (figure.white != board[pos.y + 1][pos.x + 2].white) {
-                        possibleMoves.add(new Coordinates(pos.x + 2, pos.y + 1));
-                    }
-                }
-            }
-            if (pos.y >= 3) {
-                if (board[pos.y - 1][pos.x + 2] == null) {
-                    possibleMoves.add(new Coordinates(pos.x + 2, pos.y - 1));
-                } else {
-                    if (figure.white != board[pos.y - 1][pos.x + 2].white) {
-                        possibleMoves.add(new Coordinates(pos.x + 2, pos.y - 1));
-                    }
-                }
-            }
-        }
 
         return possibleMoves;
     }

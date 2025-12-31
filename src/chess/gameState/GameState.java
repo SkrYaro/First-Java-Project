@@ -72,8 +72,11 @@ public class GameState {
     public Figure[][] board = new Figure[BOARD_MAX_ROWS][BOARD_MAX_COLS];
 
     public GameState() {
-        board[5][5] = new Horse(true);
-        board[7][7] = new Horse(false);
+        board[1][1] = new Bishop(true);
+        board[7][7] = new Bishop(false);
+        board[1][4] = new Bishop(false);
+        board[5][5] = new Queen(true);
+
     }
 
     public String getHorizonLine() {
@@ -110,8 +113,11 @@ public class GameState {
     }
 
     public String getBoard(List<Coordinates> possibleMoves) {
+
+        boolean possibleBoolMove = false;
+
         StringBuilder consoleBoard = new StringBuilder();
-        String upLine = "――――――――――――――――\n";
+        String upLine = "――――――――――――――――――――――――――――――――\n";
         String sideLine = "|";
         consoleBoard.append(getHorizonLine()).append('\n');
         consoleBoard.append(upLine);
@@ -121,13 +127,25 @@ public class GameState {
                 Figure figure = board[i][j];
                 for (Coordinates possibleMove : possibleMoves) {
                     if (possibleMove.x == j && possibleMove.y == i) {
-                        consoleBoard.append("⬜");
+
+                        if(board[i][j] == null){
+                            consoleBoard.append("⬜  ,");
+                        }else {
+                            consoleBoard.append("⬜").append(figure.getConsoleString()).append(',');
+                        }
+                        possibleBoolMove = true;
+
                     }
                 }
-                if (figure == null) {
-                    consoleBoard.append("    ,");
-                } else {
-                    consoleBoard.append(' ').append(figure.getConsoleString()).append(" ,");
+
+                if (!possibleBoolMove){
+                    if (figure == null) {
+                        consoleBoard.append("    ,");
+                    } else {
+                        consoleBoard.append(' ').append(figure.getConsoleString()).append(" ,");
+                    }
+                }else {
+                    possibleBoolMove = false;
                 }
             }
             consoleBoard.append(sideLine);
