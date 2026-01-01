@@ -51,7 +51,6 @@ public class King extends Figure {
 
 
 
-
         return possibleMoves;
     }
 

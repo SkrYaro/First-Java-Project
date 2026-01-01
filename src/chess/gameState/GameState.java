@@ -3,11 +3,7 @@ package chess.gameState;
 import chess.Coordinates;
 import chess.gameState.gameObject.Bishop;
 import chess.gameState.gameObject.Figure;
-import chess.gameState.gameObject.Horse;
-import chess.gameState.gameObject.King;
-import chess.gameState.gameObject.Pawn;
 import chess.gameState.gameObject.Queen;
-import chess.gameState.gameObject.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,36 +160,27 @@ public class GameState {
             System.out.println("its a null");
             return possibleMoves;
         } else {
-            List<Coordinates> possibleMoves = figure.getPossibleMoves(pos, board);
-
-//            System.out.println(figure.getPossibleMoves(pos, board));
-            return possibleMoves;
+            return figure.getPossibleMoves(pos, board);
         }
     }
 
     public void showPossibleMoves(List<Coordinates> possibleMoves) {
-        for (int i = 0; i < possibleMoves.size(); i++) {
+        for (Coordinates possibleMove : possibleMoves) {
             //            possibleList[i] += (possibleMoves.get(i).x + possibleMoves.get(i).y);
-            char a = (char) ('a' + possibleMoves.get(i).x);
-            System.out.println((a + "" + (possibleMoves.get(i).y + 1)));
+            char a = (char) ('a' + possibleMove.x);
+            System.out.println((a + "" + (possibleMove.y + 1)));
         }
 
     }
 
     public Coordinates getPossibleMove(List<Coordinates> possibleMoves, Coordinates cord) {
-
-
-        Coordinates possibleMove = null;
         for (Coordinates move : possibleMoves) {
             System.out.println(move.x + move.y);
             if (move.x == cord.x && move.y == cord.y) {
-                possibleMove = new Coordinates(move.x, move.y);
-                return possibleMove;
+                return move;
             }
             System.out.println("don't have possible move try again");
         }
-        return possibleMove;
-
+        return null;
     }
-
 }
