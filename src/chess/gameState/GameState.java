@@ -3,16 +3,32 @@ package chess.gameState;
 import chess.Coordinates;
 import chess.gameState.gameObject.Bishop;
 import chess.gameState.gameObject.Figure;
-import chess.gameState.gameObject.Horse;
-import chess.gameState.gameObject.King;
-import chess.gameState.gameObject.Pawn;
 import chess.gameState.gameObject.Queen;
-import chess.gameState.gameObject.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameState {
+
+    public static final int BOARD_MIN_ROWS = 0;
+    public static final int BOARD_MIN_COLS = 0;
+    public static final int BOARD_MAX_ROWS = 8;
+    public static final int BOARD_MAX_COLS = 8;
+
+/*
+*
+* | a  | b  | c  | d  | e  | f  | g  | h
+―――――――――――――――――――――――――
+1| wR , wH , wB , wQ , wK , wB , wH , wR ,|
+2| wP , wP , wP , wP , wP , wP , wP , wP ,|
+3|    ,    ,    ,    ,    ,    ,    ,    ,|
+4|    ,    ,    ,    ,    ,    ,    ,    ,|
+5|    ,    ,    ,    ,    ,    ,    ,    ,|
+6|    ,    ,    ,    ,    ,    ,    ,    ,|
+7| bP , bP , bP , bP , bP , bP , bP , bP ,|
+8| bR , bH , bB , bQ , bK , bB , bH , bR ,|
+*
+* */
 
     /*public String[][] gameBoard = {
             {"bR", "bB", "bH", "bQ", "bK", "bH", "bB", "bR"},
@@ -26,23 +42,38 @@ public class GameState {
     };*/
 
 
-    public Figure[][] board = {
-            {new Rook(true, 'R'), new Horse(true, 'H'), new Bishop(true, 'B'), new Queen(true, 'Q'), new King(true, 'K'), new Bishop(true, 'B'), new Horse(true, 'H'), new Rook(true, 'R')},
+    /*public Figure[][] board = {
+            {new Rook(true), new Horse(true), new Bishop(true), new Queen(true),new King(true) , new Bishop(true), new Horse(true), new Rook(true)},
             {new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true)},
-            {new Pawn(false), null, null, null, null, null, null, null},
             {null, null, null, null, null, null, null, null},
-            {new Pawn(true), null, null, null, null, null, null, null},
-            {new Pawn(false), null, null, null, null, null, null, null},
-            {new Pawn(false), new Pawn(false),
-                    new Pawn(false), new Pawn(false),
-                    new Pawn(false), new Pawn(false),
-                    new Pawn(false), new Pawn(false)},
-            {new Rook(false, 'R'), new Horse(false, 'H'),
-                    new Bishop(false, 'B'), new Queen(false, 'Q'),
-                    new King(false, 'K'), new Bishop(false, 'B'),
-                    new Horse(false, 'H'), new Rook(false, 'R')},
+            {null, null, null, null , null, null,null, null},
+            {null, null, null, null, null, null, null, null},
+            {null, null, null, null, null, null, null, null},
+            {new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false)},
+            {new Rook(false), new Horse(false), new Bishop(false), new Queen(false), new King(false), new Bishop(false), new Horse(false), new Rook(false)},
 
-    };
+    };*/
+
+    /*public Figure[][] board = {
+            {new Horse(false), null, null, null, null, null, null, new Horse(true)},
+            {null, null, new Pawn(true), null, new Pawn(false), null, null, null},
+            {null, new Horse(true), null, null, null, new Pawn(false), null, null},
+            {null, null, null, new Horse(false), null, null, null, null},
+            {null, null, new Pawn(false), null, null, null, null, null},
+            {null, new Pawn(false), new Pawn(false), null, null, null, null, null},
+            {null, null, new Pawn(true), null, null, null, null, null},
+            {new Horse(true), null, null, null, null, null, null, new Horse(true)},
+    };*/
+
+    public Figure[][] board = new Figure[BOARD_MAX_ROWS][BOARD_MAX_COLS];
+
+    public GameState() {
+        board[1][1] = new Bishop(true);
+        board[7][7] = new Bishop(false);
+        board[1][4] = new Bishop(false);
+        board[5][5] = new Queen(true);
+
+    }
 
     public String getHorizonLine() {
         StringBuilder horizonLine = new StringBuilder();
@@ -78,8 +109,11 @@ public class GameState {
     }
 
     public String getBoard(List<Coordinates> possibleMoves) {
+
+        boolean possibleBoolMove = false;
+
         StringBuilder consoleBoard = new StringBuilder();
-        String upLine = "――――――――――――――――\n";
+        String upLine = "――――――――――――――――――――――――――――――――\n";
         String sideLine = "|";
         consoleBoard.append(getHorizonLine()).append('\n');
         consoleBoard.append(upLine);
@@ -89,13 +123,25 @@ public class GameState {
                 Figure figure = board[i][j];
                 for (Coordinates possibleMove : possibleMoves) {
                     if (possibleMove.x == j && possibleMove.y == i) {
-                        consoleBoard.append("⬜");
+
+                        if(board[i][j] == null){
+                            consoleBoard.append("⬜  ,");
+                        }else {
+                            consoleBoard.append("⬜").append(figure.getConsoleString()).append(',');
+                        }
+                        possibleBoolMove = true;
+
                     }
                 }
-                if (figure == null) {
-                    consoleBoard.append("    ,");
-                } else {
-                    consoleBoard.append(' ').append(figure.getConsoleString()).append(" ,");
+
+                if (!possibleBoolMove){
+                    if (figure == null) {
+                        consoleBoard.append("    ,");
+                    } else {
+                        consoleBoard.append(' ').append(figure.getConsoleString()).append(" ,");
+                    }
+                }else {
+                    possibleBoolMove = false;
                 }
             }
             consoleBoard.append(sideLine);
@@ -114,36 +160,27 @@ public class GameState {
             System.out.println("its a null");
             return possibleMoves;
         } else {
-            List<Coordinates> possibleMoves = figure.getPossibleMoves(pos, board);
-
-//            System.out.println(figure.getPossibleMoves(pos, board));
-            return possibleMoves;
+            return figure.getPossibleMoves(pos, board);
         }
     }
 
     public void showPossibleMoves(List<Coordinates> possibleMoves) {
-        for (int i = 0; i < possibleMoves.size(); i++) {
+        for (Coordinates possibleMove : possibleMoves) {
             //            possibleList[i] += (possibleMoves.get(i).x + possibleMoves.get(i).y);
-            char a = (char) ('a' + possibleMoves.get(i).x);
-            System.out.println((a + "" + (possibleMoves.get(i).y + 1)));
+            char a = (char) ('a' + possibleMove.x);
+            System.out.println((a + "" + (possibleMove.y + 1)));
         }
 
     }
 
     public Coordinates getPossibleMove(List<Coordinates> possibleMoves, Coordinates cord) {
-
-
-        Coordinates possibleMove = null;
         for (Coordinates move : possibleMoves) {
             System.out.println(move.x + move.y);
             if (move.x == cord.x && move.y == cord.y) {
-                possibleMove = new Coordinates(move.x, move.y);
-                return possibleMove;
+                return move;
             }
             System.out.println("don't have possible move try again");
         }
-        return possibleMove;
-
+        return null;
     }
-
 }

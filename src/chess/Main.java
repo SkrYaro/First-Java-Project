@@ -23,9 +23,8 @@ class Main {
     private static void game(GameState gameState, boolean whiteMove) {
         boolean playerChoosingPos = true;
         boolean playerPosChoosed = false;
-        boolean playerMove = true;
-        boolean playerChoseMove = true;
-        boolean cancel = false;
+        boolean playerChoseMove;
+        boolean cancel;
 
 
         // show board
@@ -48,15 +47,19 @@ class Main {
                         if (figure.white == whiteMove) {
                             playerPosChoosed = true;
                         } else if (!whiteMove) {
-                            System.out.println("This isn't your color , you're white");
+                            System.out.println("This isn't your color, you're white");
+                            System.out.println(gameState.getBoard());
                         } else {
-                            System.out.println("This isn't your color , you're black");
+                            System.out.println("This isn't your color, you're black");
+                            System.out.println(gameState.getBoard());
                         }
                     } else {
-                        System.out.println("Error , this is empty square");
+                        System.out.println("Error, this is empty square");
+                        System.out.println(gameState.getBoard());
                     }
                 } else {
                     System.out.println("It is empty square");
+                    System.out.println(gameState.getBoard());
                 }
                 figureCoord.success = false;
             }
@@ -65,8 +68,8 @@ class Main {
             if (playerPosChoosed) {
                 while (playerChoseMove) {
                     List<Coordinates> figurePossibleMoves = gameState.getPossibleMoves(figureCoord);
-                    System.out.println((gameState.getBoard(figurePossibleMoves)));
-                    System.out.println("Choose move again a-h , 1-8 ( new emoji its possible moves) if want cancel write \"cancel\" ");
+                    System.out.println(gameState.getBoard(figurePossibleMoves));
+                    System.out.println("Choose move again a-h, 1-8 (new emoji its possible moves) if want cancel write \"cancel\"");
                     String figureMove = scanner.next();
                     if (figureMove.equals("cancel")) {
                         cancel = true;
@@ -80,6 +83,11 @@ class Main {
                         Coordinates moveFigureCord = new Coordinates(figureMove);
 
                         Coordinates movement = gameState.getPossibleMove(figurePossibleMoves, moveFigureCord);
+
+                        if (movement == null) {
+                            System.out.println("Not valid move, pick again");
+                            continue;
+                        }
 
                         Figure figure = gameState.board[figureCoord.y][figureCoord.x];
 

@@ -1,21 +1,67 @@
 package chess.gameState.gameObject;
 
 import chess.Coordinates;
+import chess.gameState.GameState;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SequencedCollection;
 
 public class Horse extends Figure {
 
 
-    public Horse(boolean white, char type) {
+    public Horse(boolean white) {
         super(white, 'H');
     }
 
     @Override
     public List<Coordinates> getPossibleMoves(Coordinates pos, Figure[][] board) {
+                /*
+                *
+                *        | a  | b  | c  | d  | e  | f  | g  | h
+                ―       ――――――――――――――――――――――――
+                1       | wR , wH , wB , wQ , wK , wB , wH , wR ,|
+                2       |    ,    , XX ,    , XX ,    ,    ,    ,|
+                3       |    , XX ,    ,    ,    , XX ,    ,    ,|
+                4       |    ,    ,    , bH ,    ,    ,    ,    ,|
+                5       |    , XX ,    ,    ,    , XX ,    ,    ,|
+                6       |    ,    , XX ,    , XX ,    ,    ,    ,|
+                7       | bP , bP , bP , bP , bP , bP , bP , bP ,|
+                8       | bR ,  , bB , bQ , bK , bB , bH , bR ,|
+                *
+                * */
         List<Coordinates> possibleMoves = new ArrayList<>();
+
+        Figure figure = board[pos.y][pos.x];
+
+        List<Coordinates> vectors = List.of(
+                new Coordinates(2, 1),
+                new Coordinates(1, 2),
+                new Coordinates(-2, -1),
+                new Coordinates(-1, -2),
+                new Coordinates(2, -1),
+                new Coordinates(-1, 2),
+                new Coordinates(-2, 1),
+                new Coordinates(1, -2)
+        );
+
+        for (Coordinates vector : vectors) {
+            int moveX = pos.x + vector.x; // x = [0; 7]
+            int moveY = pos.y + vector.y; // y = [0; 7]
+            if ((GameState.BOARD_MIN_COLS <= moveY && moveY <= GameState.BOARD_MAX_COLS - 1) && (GameState.BOARD_MIN_ROWS <= moveX && moveX <= GameState.BOARD_MAX_ROWS - 1)) {
+                if (board[moveY][moveX] == null) {
+                    possibleMoves.add(new Coordinates(moveX, moveY));
+                } else {
+                    if (figure.white != board[moveY][moveX].white) {
+                        possibleMoves.add(new Coordinates(moveX, moveY));
+                    }
+                }
+                // if on board
+                // if figure && figure.white != white
+                possibleMoves.add(new Coordinates(moveX, moveY));
+            }
+        }
+
+
         return possibleMoves;
     }
 

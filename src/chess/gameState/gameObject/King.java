@@ -1,21 +1,56 @@
 package chess.gameState.gameObject;
 
 import chess.Coordinates;
+import chess.gameState.GameState;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SequencedCollection;
 
 public class King extends Figure {
 
 
-    public King(boolean white, char type) {
+    public King(boolean white) {
         super(white, 'K');
     }
 
     @Override
     public List<Coordinates> getPossibleMoves(Coordinates pos, Figure[][] board) {
         List<Coordinates> possibleMoves = new ArrayList<>();
+        Figure figure = board[pos.y][pos.x];
+
+        List<Coordinates> vectors = List.of(
+                new Coordinates(1, 1),
+                new Coordinates(-1, 1),
+                new Coordinates(0, 1),
+                new Coordinates(-1, 0),
+                new Coordinates(1, 0),
+                new Coordinates(-1, -1),
+                new Coordinates(1, -1),
+                new Coordinates(0, -1)
+        );
+
+        for (Coordinates vector: vectors){
+            int moveX = pos.x + vector.x;
+            int moveY = pos.y + vector.y;
+
+            if ((GameState.BOARD_MIN_COLS <= moveY && moveY <= GameState.BOARD_MAX_COLS - 1 )&&(GameState.BOARD_MIN_ROWS <= moveX && moveX <= GameState.BOARD_MAX_ROWS - 1)){
+                if (board[moveY][moveX] == null ){
+                    possibleMoves.add(new Coordinates(moveX,moveY));
+                }else {
+                    if(figure.white != board[moveY][moveX].white ){
+                        possibleMoves.add(new Coordinates(moveX,moveY));
+                    }
+                }
+
+
+            }
+
+        }
+
+
+
+
+
         return possibleMoves;
     }
 
