@@ -124,9 +124,9 @@ public class GameState {
                 for (Coordinates possibleMove : possibleMoves) {
                     if (possibleMove.x == j && possibleMove.y == i) {
 
-                        if(board[i][j] == null){
+                        if (board[i][j] == null) {
                             consoleBoard.append("⬜  ,");
-                        }else {
+                        } else {
                             consoleBoard.append("⬜").append(figure.getConsoleString()).append(',');
                         }
                         possibleBoolMove = true;
@@ -134,13 +134,13 @@ public class GameState {
                     }
                 }
 
-                if (!possibleBoolMove){
+                if (!possibleBoolMove) {
                     if (figure == null) {
                         consoleBoard.append("    ,");
                     } else {
                         consoleBoard.append(' ').append(figure.getConsoleString()).append(" ,");
                     }
-                }else {
+                } else {
                     possibleBoolMove = false;
                 }
             }
@@ -183,4 +183,25 @@ public class GameState {
         }
         return null;
     }
+
+//    #TODO CheckLogic
+    /*
+     * System:
+     * 1. Validate King's moves{
+     * 1.1 GetKing
+     * 1.2 Check King's possible moves and find connections with enemy attacks
+
+     * 2. Check , is King under attack ( check ){
+     * 2.1 Check after enemy move , if king is in check
+     * 2.2 Alarm of check}
+     *
+     * 3. Validate possible moves for defend king{
+     * 3.1 Get all possible figures in king's side ( white or black side)
+     * 3.2 From this figures start searching this moves ,whats can defend king , there are: move or attack }
+     *
+     * 4. Validate possible moves , whats can create a check for it king{
+     * 4.1. When we validate moves , start creating theoretical moves and check them ,\
+     *       \ if move create check or broking game logic , they left List<PossibleMoves }*/
+
+
 }
