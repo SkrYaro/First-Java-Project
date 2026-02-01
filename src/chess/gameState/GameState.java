@@ -4,7 +4,9 @@ import chess.Coordinates;
 import chess.gameState.gameObject.Figure;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GameState {
 
@@ -13,12 +15,12 @@ public class GameState {
     public static final int BOARD_MAX_ROWS = 8;
     public static final int BOARD_MAX_COLS = 8;
 
-    FabricFigureLocate figureFabric = new FabricFigureLocate();
+    public Figure[][] board;
 
-    public Figure[][] board = new Figure[BOARD_MAX_ROWS][BOARD_MAX_COLS];
+//    private boolean check = false;
 
     public GameState() {
-        figureFabric.testingGame(board);
+        board = BoardFactory.testBoard(BOARD_MAX_ROWS, BOARD_MAX_COLS);
     }
 
     public String getHorizonLine() {
@@ -59,7 +61,7 @@ public class GameState {
         boolean possibleBoolMove = false;
 
         StringBuilder consoleBoard = new StringBuilder();
-        String upLine = "――――――――――――――――――――――――――――――――\n";
+        String upLine = "―".repeat(32) + "\n";
         String sideLine = "|";
         consoleBoard.append(getHorizonLine()).append('\n');
         consoleBoard.append(upLine);
@@ -100,21 +102,26 @@ public class GameState {
 
     public List<Coordinates> getPossibleMoves(Coordinates pos) {
         Figure figure = board[pos.y][pos.x];
-
-        if (figure == null) {
-            List<Coordinates> possibleMoves = new ArrayList<>();
-            System.out.println("its a null");
-            return possibleMoves;
-        } else {
+        if (figure != null) {
+            /*
+            if (getCheck(figure.white)) {
+                if (figure.type == 'K') {
+                    return validateKingsMoves(figure.getPossibleMoves(pos, board), figure.white);
+                } else {
+                    return checkValidateMoves(figure.getPossibleMoves(pos, board), figure.white, figure, pos);
+                }
+            }*/
             if (figure.type == 'K') {
                 return validateKingsMoves(figure.getPossibleMoves(pos, board), figure.white);
             } else {
-                return figure.getPossibleMoves(pos, board);
+                return checkValidateMoves(figure.getPossibleMoves(pos, board),figure.white,figure,pos);
             }
+        } else {
+            List<Coordinates> possibleMoves = new ArrayList<>();
+            System.out.println("its a null");
+            return possibleMoves;
         }
-
     }
-
 
    /* public void showPossibleMoves(List<Coordinates> possibleMoves) {
         for (Coordinates possibleMove : possibleMoves) {
@@ -129,6 +136,7 @@ public class GameState {
         for (Coordinates move : possibleMoves) {
 //            System.out.println(move.x + move.y);
             if (move.x == cord.x && move.y == cord.y) {
+
                 return move;
             }
             System.out.println("don't have possible move try again");
@@ -136,40 +144,63 @@ public class GameState {
         return null;
     }
 
-    private Coordinates getKingPos(Figure[][] board, boolean white){
-        for(int i = 0 ; i < BOARD_MAX_COLS ; i ++){
-            for(int j = 0 ; j < BOARD_MAX_ROWS ; j ++){
-                if (board[i][j].type == 'k'&& board[i][j].white == white){
-                    return new Coordinates(j , i);
-                }
-            }
-        }
-        return null;
-    }
-
-    private List<Coordinates> getEnemyAttacks(Figure[][] board, boolean white){
-        List<Coordinates> enemyAttacksList = new ArrayList<>();
-        for(int i = 0 ; i < BOARD_MAX_COLS ; i ++){
-            for(int j = 0 ; j < BOARD_MAX_ROWS ; j ++){
-                if (board[i][j] != null){
-                    if (board[i][j].white != white) {
-                        enemyAttacksList.addAll(getPossibleMoves(new Coordinates(j , i)));
+    private Coordinates getKingPos(Figure[][] board, boolean white) {
+        for (int i = 0; i < BOARD_MAX_COLS; i++) {
+            for (int j = 0; j < BOARD_MAX_ROWS; j++) {
+                if (board[i][j] != null) {
+                    if (board[i][j].type == 'K' && board[i][j].white == white) {
+                        return new Coordinates(j, i);
                     }
                 }
             }
         }
-        return enemyAttacksList;
+        throw new IllegalStateException("King must be on a board");
     }
 
-    public List<Coordinates> validateKingsMoves(List<Coordinates> possibleMoves,boolean white) {
-        List<Coordinates> enemyAttacksList = getEnemyAttacks(board,white);
+    private List<Coordinates> getEnemyAttacks(Figure[][] board, boolean white) {
+        Set<Coordinates> enemyAttacksList = new HashSet<>();
+        for (int i = 0; i < BOARD_MAX_COLS; i++) {
+            for (int j = 0; j < BOARD_MAX_ROWS; j++) {
+                if (board[i][j] != null) {
+                    if (board[i][j].white != white && board[i][j].type != 'K') {
+                        enemyAttacksList.addAll(board[i][j].getPossibleMoves(new Coordinates(j, i), board));
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(enemyAttacksList);
+    }
+
+    public List<Coordinates> checkValidateMoves(List<Coordinates> possibleMoves, boolean white, Figure figure, Coordinates pos) {
+        List<Coordinates> successMoves = new ArrayList<>();
+        for (Coordinates possibleMove : possibleMoves) {
+            if (board[possibleMove.y][possibleMove.x] != null) {
+                Figure savedPos = board[possibleMove.y][possibleMove.x];
+                figure.makeMove(pos, possibleMove, board);
+                if (!getCheck(white)) {
+                    successMoves.add(possibleMove);
+                }
+                figure.makeMove(possibleMove, pos, board);
+                board[possibleMove.y][possibleMove.x] = savedPos;
+            } else {
+                figure.makeMove(pos, possibleMove, board);
+                if (!getCheck(white)) {
+                    successMoves.add(possibleMove);
+                }
+                figure.makeMove(possibleMove, pos, board);
+            }
+        }
+        return successMoves;
+    }
+
+    public List<Coordinates> validateKingsMoves(List<Coordinates> possibleMoves, boolean white) {
+        List<Coordinates> enemyAttacksList = getEnemyAttacks(board, white);
         List<Coordinates> wrongMoves = new ArrayList<>();
 
         for (Coordinates possibleMove : possibleMoves) {
             for (Coordinates coordinates : enemyAttacksList) {
                 if (possibleMove.x == coordinates.x && possibleMove.y == coordinates.y) {
                     wrongMoves.add(possibleMove);
-                    System.out.println("move added");
                 }
             }
         }
@@ -179,4 +210,16 @@ public class GameState {
         return possibleMoves;
     }
 
+    public void isCheck(boolean white) {
+        if (getCheck(white)){
+            System.out.println("You are under attack");
+        }
+    }
+
+    private boolean getCheck(boolean white) {
+        Coordinates kingPos = getKingPos(board, white);
+        return getEnemyAttacks(board, white).stream()
+                .anyMatch(kingPos::equals);
+    }
 }
+

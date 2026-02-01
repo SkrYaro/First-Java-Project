@@ -17,8 +17,6 @@ public class Coordinates {
     }
 
     public Coordinates(String figureCoordStr) {
-
-
         if (figureCoordStr.length() >= 3) {
             this.success = false;
             System.out.println("You make an mistake");
@@ -37,7 +35,6 @@ public class Coordinates {
                 this.success = false;
             }
         }
-
     }
 
     public int getCharX() {
@@ -48,5 +45,13 @@ public class Coordinates {
 
     public int getX() {
         return x;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Coordinates other) {
+            return x == other.x && y == other.y;
+        }
+        return false;
     }
 }

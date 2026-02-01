@@ -8,16 +8,20 @@ import chess.gameState.gameObject.Pawn;
 import chess.gameState.gameObject.Queen;
 import chess.gameState.gameObject.Rook;
 
-public class FabricFigureLocate {
-    public FabricFigureLocate() {
+public class BoardFactory {
 
+    public static Figure[][] testBoard(int height, int width) {
+        Figure[][] board = new Figure[height][width];
+//        board[0][0] = FigureFactory.createFigure(FigureType.KING, FigureColor.BLACK);
+        board[5][5] = new Pawn(false);
+        board[0][0] = new King(false);
+        board[0][1] = new Queen(false);
+        board[1][7] = new Queen(true);
+        board[7][5] = new King(true);
+        return board;
     }
 
-    public void defaultGame(Figure[][] board) {
-        defaultSet(board);
-    }
-
-    private void defaultSet(Figure[][] board) {
+    private static Figure[][] defaultSet(Figure[][] board) {
         int side = 0;
         boolean white = true;
         for (int k = 0; k < GameState.BOARD_MAX_ROWS; k++) {
@@ -39,18 +43,6 @@ public class FabricFigureLocate {
             side = 7;
             white = !white;
         }
+        return board;
     }
-
-    public void testingGame(Figure[][] board) {
-        testGame(board);
-    }
-
-    private void testGame(Figure[][] board) {
-        board[0][0] = new King(true);
-        board[7][7] = new Bishop(false);
-        board[1][4] = new Bishop(false);
-        board[3][2] = new Queen(false);
-
-    }
-
 }
