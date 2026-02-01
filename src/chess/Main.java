@@ -21,12 +21,13 @@ class Main {
     }
 
     private static void game(GameState gameState, boolean whiteMove) {
+
         boolean playerChoosingPos = true;
         boolean playerPosChoosed = false;
         boolean playerChoseMove;
         boolean cancel;
 
-
+        gameState.isCheck(whiteMove);
         // show board
         System.out.println(gameState.getBoard());
 
@@ -41,8 +42,6 @@ class Main {
             if (figureCoord.success) {
                 if (gameState.getPossibleMoves(figureCoord) != null) {
                     Figure figure = gameState.board[figureCoord.y][figureCoord.x];
-//                        System.out.println(figureCoord.x + " " + figureCoord.y);
-//                        System.out.println(whiteMove + " " + figure.white);
                     if (figure != null) {
                         if (figure.white == whiteMove) {
                             playerPosChoosed = true;
@@ -97,28 +96,8 @@ class Main {
                         playerPosChoosed = false;
                         playerChoosingPos = false;
                     }
-
-
                 }
             }
         }
-        // validate choosing
-        // choose move
-        // validate move
-        // move
-
-
-        // Drawing board and helping poss
-        /*
-         *Game working rule:
-         * Validate all {
-         * (show board,
-         * show who move,
-         * choose figure ,
-         * show possible moves,
-         * do anybody chosen move)
-         * }
-         */
-
     }
 }

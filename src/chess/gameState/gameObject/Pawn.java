@@ -13,10 +13,6 @@ public class Pawn extends Figure {
         super(white, 'P');
     }
 
-    public Pawn(boolean white, char type) {
-        super(white, type);
-    }
-
     @Override
     public List<Coordinates> getPossibleMoves(Coordinates pos, Figure[][] board) {
         List<Coordinates> possibleMoves = new ArrayList<>();
@@ -64,7 +60,7 @@ public class Pawn extends Figure {
         return possibleMoves;
 
     }
-
+    @Override
     public void makeMove(Coordinates pos, Coordinates move, Figure[][] board) {
 //            start position
         int posX = pos.x;
