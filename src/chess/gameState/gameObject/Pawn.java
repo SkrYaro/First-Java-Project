@@ -19,28 +19,7 @@ public class Pawn extends Figure {
         List<Coordinates> possibleMoves = new ArrayList<>();
         int posX = pos.x;
         int posY = pos.y;
-        if (!board[posY][posX].white) {
-            if (posY - 1 > GameState.BOARD_MIN_COLS) {
-                if (board[posY + 1][posX] == null) {
-                    possibleMoves.add(new Coordinates(posX, posY + 1));
-                }
-            }
-            if (posY - 2 > GameState.BOARD_MIN_COLS) {
-                if (firstMove && board[posY + 2][posX] == null) {
-                    possibleMoves.add(new Coordinates(posX, posY + 2));
-                }
-            }
-            if (posY - 1 > GameState.BOARD_MIN_COLS && posX + 1 < GameState.BOARD_MAX_COLS ) {
-                if (board[posY - 1][posX + 1] != null && board[posY - 1][posX + 1].white) {
-                    possibleMoves.add(new Coordinates(posX + 1, posY - 1));
-                }
-            }
-            if (posY - 1 > GameState.BOARD_MIN_COLS && posX - 1 > GameState.BOARD_MIN_ROWS ) {
-                if (board[posY + 1][posX - 1] != null && board[posY + 1][posX - 1].white) {
-                    possibleMoves.add(new Coordinates(posX - 1, posY + 1));
-                }
-            }
-        } else {
+        if (board[posY][posX].white) {
             if (posY + 1 < GameState.BOARD_MAX_COLS) {
                 if (board[posY + 1][posX] == null) {
                     possibleMoves.add(new Coordinates(posX, posY + 1));
@@ -52,13 +31,34 @@ public class Pawn extends Figure {
                 }
             }
             if (posY + 1 < GameState.BOARD_MAX_COLS && posX + 1 < GameState.BOARD_MAX_COLS ) {
-                if (board[posY - 1][posX + 1] != null && board[posY - 1][posX + 1].white) {
+                if (board[posY - 1][posX + 1] != null && !board[posY - 1][posX + 1].white) {
                     possibleMoves.add(new Coordinates(posX + 1, posY - 1));
                 }
             }
             if (posY + 1 < GameState.BOARD_MAX_COLS && posX - 1 > GameState.BOARD_MIN_ROWS ) {
-                if (board[posY + 1][posX - 1] != null && board[posY + 1][posX - 1].white) {
+                if (board[posY + 1][posX - 1] != null && !board[posY + 1][posX - 1].white) {
                     possibleMoves.add(new Coordinates(posX - 1, posY + 1));
+                }
+            }
+        } else {
+            if (posY - 1 > GameState.BOARD_MIN_COLS) {
+                if (board[posY - 1][posX] == null) {
+                    possibleMoves.add(new Coordinates(posX, posY - 1));
+                }
+            }
+            if (posY - 2 > GameState.BOARD_MIN_COLS) {
+                if (firstMove && board[posY - 2][posX] == null) {
+                    possibleMoves.add(new Coordinates(posX, posY - 2));
+                }
+            }
+            if (posY - 1 > GameState.BOARD_MIN_COLS && posX + 1 < GameState.BOARD_MAX_COLS ) {
+                if (board[posY - 1][posX + 1] != null && board[posY - 1][posX + 1].white) {
+                    possibleMoves.add(new Coordinates(posX + 1, posY - 1));
+                }
+            }
+            if (posY - 1 > GameState.BOARD_MIN_COLS && posX - 1 > GameState.BOARD_MIN_ROWS ) {
+                if (board[posY - 1][posX - 1] != null && board[posY - 1][posX - 1].white) {
+                    possibleMoves.add(new Coordinates(posX - 1, posY - 1));
                 }
             }
         }

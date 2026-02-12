@@ -27,7 +27,7 @@ public class Coordinates {
                 this.success = true;
                 x = x - 'a';
                 y = y - 49  ;
-                System.out.println(this.x + "   " +this.y);
+//                System.out.println(this.x + "   " +this.y);
             }
             else{
                 System.out.println(x +"   " + y );

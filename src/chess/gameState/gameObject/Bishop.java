@@ -9,10 +9,10 @@ import java.util.List;
 public class Bishop extends Figure {
 
     private final List<Coordinates> directions = List.of(
-            new Coordinates(1, 0),
-            new Coordinates(-1, 0),
-            new Coordinates(0, -1),
-            new Coordinates(0, 1)
+            new Coordinates(1, 1),
+            new Coordinates(-1, 1),
+            new Coordinates(-1, -1),
+            new Coordinates(1, -1)
     );
 
     public Bishop(boolean white) {
@@ -48,8 +48,6 @@ public class Bishop extends Figure {
             repeat = 1;
 
         }
-
-
         return possibleMoves;
     }
 

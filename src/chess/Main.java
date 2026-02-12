@@ -27,14 +27,11 @@ class Main {
 
             // show board
             System.out.println(gameState.getBoard());
-
-            // choose figure
             while (playerChoosingPos) {
                 cancel = false;
                 playerChoseMove = true;
                 System.out.println("Please write first: a-h , second: 1-8 for choosing poss and movement");
-                String figureCoordStr = scanner.next(); // b7
-//            System.out.println(figureCoordStr);
+                String figureCoordStr = scanner.next();
                 Coordinates figureCoord = new Coordinates(figureCoordStr);
                 if (figureCoord.success) {
                     if (gameState.getPossibleMoves(figureCoord) != null) {
@@ -111,6 +108,7 @@ class Main {
                             System.out.println("Is check!");
                         }
                         if (gameState.isGameFinished(!whiteMove)) {
+
                             gameState.gameFinisher(!whiteMove);
                             run = false;
                             gameState.getBoard();

@@ -22,8 +22,6 @@ public class GameState {
 
     public Figure[][] board;
 
-//    private boolean check = false;
-
     public boolean check;
 
     public GameState() {
@@ -39,7 +37,6 @@ public class GameState {
         return horizonLine.toString();
     }
 
-    // visual show where figures
     public String getBoard() {
         StringBuilder consoleBoard = new StringBuilder();
         String upLine = "―――――――――――――――――――――――――\n";
@@ -240,7 +237,8 @@ public class GameState {
         for (Coordinates wrongMove : wrongMoves) {
             possibleMoves.remove(wrongMove);
         }
-        return possibleMoves;
+
+        return checkValidateMoves(possibleMoves, white, board[getKingPos(board, white).y][getKingPos(board, white).x], getKingPos(board, white));
 
 
     }
@@ -271,17 +269,18 @@ public class GameState {
     public void gameFinisher(boolean white) {
         System.out.println("Game finished");
         if (isCheck(board, white)) {
+            System.out.println("It's a checkmate!!!");
             if (!white) {
-                System.out.println("Wins white");
+                System.out.println("White wins");
             } else {
-                System.out.println("Wins black");
+                System.out.println("Black wins");
             }
         } else {
             System.out.println("It's stalemate!!!");
             if (!white) {
-                System.out.println("Black don't have moves");
+                System.out.println("Black don't have any moves");
             } else {
-                System.out.println("White don't have moves");
+                System.out.println("White don't have any moves");
             }
         }
     }
@@ -322,7 +321,7 @@ public class GameState {
 
     public void changeFigure(boolean white, char chosenFigure) {
 //        Figure figure = board[findEnd(white).y][findEnd(white).x];
-        if ( chosenFigure == 'Q' || chosenFigure == 'q') {
+        if (chosenFigure == 'Q' || chosenFigure == 'q') {
             board[findEnd(white).y][findEnd(white).x] = new Queen(white);
         } else if (chosenFigure == 'H' || chosenFigure == 'h') {
             board[findEnd(white).y][findEnd(white).x] = new Horse(white);
