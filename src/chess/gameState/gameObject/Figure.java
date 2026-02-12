@@ -24,6 +24,9 @@ public abstract class Figure {
 
     abstract public List<Coordinates> getPossibleMoves(Coordinates pos, Figure[][] board);
 
+    public List<Coordinates> getForCheckMoves(Coordinates pos , Figure[][] board){
+        return getPossibleMoves(pos, board);
+    }
 
     public void makeMove(Coordinates pos, Coordinates move, Figure[][] board) {
 //            start position

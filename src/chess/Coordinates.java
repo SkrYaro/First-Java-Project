@@ -11,13 +11,13 @@ public class Coordinates {
         this.y = y;
     }
 
-    public Coordinates(char x, int y) {
+    /*public Coordinates(char x, int y) {
         this.x = x;
         this.y = y;
     }
-
+*/
     public Coordinates(String figureCoordStr) {
-        if (figureCoordStr.length() >= 3) {
+        if (figureCoordStr.length() != 2) {
             this.success = false;
             System.out.println("You make an mistake");
         } else {
@@ -27,7 +27,7 @@ public class Coordinates {
                 this.success = true;
                 x = x - 'a';
                 y = y - 49  ;
-                System.out.println(this.x + "   " +this.y);
+//                System.out.println(this.x + "   " +this.y);
             }
             else{
                 System.out.println(x +"   " + y );
@@ -37,15 +37,15 @@ public class Coordinates {
         }
     }
 
-    public int getCharX() {
+   /* public int getCharX() {
         int num = x - ('a' - 1);
         System.out.println(num);
         return num;
-    }
+    }*/
 
-    public int getX() {
+    /*public int getX() {
         return x;
-    }
+    }*/
 
     @Override
     public boolean equals(Object obj) {

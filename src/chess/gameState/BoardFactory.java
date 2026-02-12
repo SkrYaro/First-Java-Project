@@ -13,12 +13,14 @@ public class BoardFactory {
     public static Figure[][] testBoard(int height, int width) {
         Figure[][] board = new Figure[height][width];
 //        board[0][0] = FigureFactory.createFigure(FigureType.KING, FigureColor.BLACK);
-        board[5][5] = new Pawn(false);
-        board[0][0] = new King(false);
-        board[0][1] = new Queen(false);
-        board[1][7] = new Queen(true);
-        board[7][5] = new King(true);
-        return board;
+//        board[0][0] = new King(false);
+//        board[1][7] = new Queen(true);
+//        board[2][0] = new Bishop(true);
+//
+//        board[5][5] = new King(true);
+//
+//        return board;
+        return defaultSet(board);
     }
 
     private static Figure[][] defaultSet(Figure[][] board) {
