@@ -1,5 +1,7 @@
 package chess;
 
+import chess.gameState.GameState;
+
 public class Coordinates {
 
     public boolean success;
@@ -11,11 +13,6 @@ public class Coordinates {
         this.y = y;
     }
 
-    /*public Coordinates(char x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-*/
     public Coordinates(String figureCoordStr) {
         if (figureCoordStr.length() != 2) {
             this.success = false;
@@ -23,7 +20,7 @@ public class Coordinates {
         } else {
             x = figureCoordStr.charAt(0);
             y = figureCoordStr.charAt(1);
-            if ((x >= 'a' && x <= ('a' + 7)) && (y - 49 <= 8)) {
+            if ((x >= 'a' && x <= ('a' + (GameState.BOARD_MAX_COLS - 1) )) && (y - 49 <= GameState.BOARD_MAX_ROWS)) {
                 this.success = true;
                 x = x - 'a';
                 y = y - 49  ;
@@ -37,15 +34,6 @@ public class Coordinates {
         }
     }
 
-   /* public int getCharX() {
-        int num = x - ('a' - 1);
-        System.out.println(num);
-        return num;
-    }*/
-
-    /*public int getX() {
-        return x;
-    }*/
 
     @Override
     public boolean equals(Object obj) {

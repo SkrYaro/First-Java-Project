@@ -30,7 +30,7 @@ public class GameState {
 
     public String getHorizonLine() {
         StringBuilder horizonLine = new StringBuilder();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < BOARD_MAX_ROWS; i++) {
             char letter = (char) ('a' + i);
             horizonLine.append("  | ").append(letter);
         }
@@ -39,7 +39,7 @@ public class GameState {
 
     public String getBoard() {
         StringBuilder consoleBoard = new StringBuilder();
-        String upLine = "―――――――――――――――――――――――――\n";
+        String upLine = "―".repeat(BOARD_MAX_COLS * 3) + "\n";
         String sideLine = "|";
         consoleBoard.append(getHorizonLine()).append('\n');
         consoleBoard.append(upLine);
@@ -61,11 +61,9 @@ public class GameState {
     }
 
     public String getBoard(List<Coordinates> possibleMoves) {
-
         boolean possibleBoolMove = false;
-
         StringBuilder consoleBoard = new StringBuilder();
-        String upLine = "―".repeat(32) + "\n";
+        String upLine = "―".repeat(BOARD_MAX_COLS * 3) + "\n";
         String sideLine = "|";
         consoleBoard.append(getHorizonLine()).append('\n');
         consoleBoard.append(upLine);
@@ -75,17 +73,14 @@ public class GameState {
                 Figure figure = board[i][j];
                 for (Coordinates possibleMove : possibleMoves) {
                     if (possibleMove.x == j && possibleMove.y == i) {
-
                         if (board[i][j] == null) {
                             consoleBoard.append("⬜  ,");
                         } else {
                             consoleBoard.append("⬜").append(figure.getConsoleString()).append(',');
                         }
                         possibleBoolMove = true;
-
                     }
                 }
-
                 if (!possibleBoolMove) {
                     if (figure == null) {
                         consoleBoard.append("    ,");
@@ -99,11 +94,9 @@ public class GameState {
             consoleBoard.append(sideLine);
             consoleBoard.append('\n');
         }
-
         consoleBoard.append(upLine);
         return consoleBoard.toString();
     }
-
     public List<Coordinates> getPossibleMoves(Coordinates pos) {
         Figure figure = board[pos.y][pos.x];
         if (figure != null) {
@@ -125,17 +118,14 @@ public class GameState {
             System.out.println("its a null");
             return possibleMoves;
         }
-
     }
 
     public Coordinates getPossibleMove(List<Coordinates> possibleMoves, Coordinates cord) {
         for (Coordinates move : possibleMoves) {
 //            System.out.println(move.x + move.y);
             if (move.x == cord.x && move.y == cord.y) {
-
                 return move;
             }
-
         }
         return null;
     }
@@ -168,7 +158,6 @@ public class GameState {
     }
 
     public boolean isCheck(Figure[][] board, boolean white) {
-
         Coordinates kingPos = getKingPos(board, white);
         for (int i = 0; i < BOARD_MAX_ROWS; i++) {
             for (int j = 0; j < BOARD_MAX_COLS; j++) {
@@ -183,7 +172,6 @@ public class GameState {
         }
         return false;
     }
-
 
     public List<Coordinates> checkValidateMoves(List<Coordinates> possibleMoves, boolean white, Figure figure, Coordinates pos) {
         List<Coordinates> successMoves = new ArrayList<>();

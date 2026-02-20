@@ -39,7 +39,5 @@ public abstract class Figure {
 //            moving your figure
         board[moveY][moveX] = board[posY][posX];
         board[posY][posX] = null;
-
-
     }
 }

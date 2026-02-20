@@ -17,19 +17,21 @@ class Main {
         game(gameState, whiteMove);
     }
 
+//    #TODO Make a game menu
+
     private static void game(GameState gameState, boolean whiteMove) {
         boolean run = true;
         while (run) {
             boolean playerChoosingPos = true;
             boolean playerPosChoosed = false;
-            boolean playerChoseMove;
+            boolean playerChoseMove = true;
             boolean cancel;
 
             // show board
             System.out.println(gameState.getBoard());
             while (playerChoosingPos) {
                 cancel = false;
-                playerChoseMove = true;
+
                 System.out.println("Please write first: a-h , second: 1-8 for choosing poss and movement");
                 String figureCoordStr = scanner.next();
                 Coordinates figureCoord = new Coordinates(figureCoordStr);
